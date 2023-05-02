@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public $customer;
@@ -13,8 +14,9 @@ class DashboardController extends Controller
     }
     public function index()
     {
+        $customer = DB::table('data')->count();
         $data = Customer::all();
-        return view('customer.index', compact('data'));
+        return view('customer.index', compact('customer', 'data'));
     }
 
     /**
